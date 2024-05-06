@@ -1,0 +1,32 @@
+<!-- 컴퓨터에서 extends는 일반적으로 상속을 의미한다. -->
+{% extends "./base.html" %}
+{% block main %}
+
+<div class="container">
+    {% comment %} <h1 class="mt-5" style="padding-top: 20px; padding-bottom: 10px;">{{ goods.id }}번 상세 정보</h1> {% endcomment %}
+    <div style="text-align: right;">
+        {% comment %} <a href="" class="btn btn btn-outline-warning btn-sm pull-right"
+            style="padding-top: 5px; padding-bottom: 5px; margin-bottom: 10px;">로그인</a>
+        <a href="" class="btn btn btn-outline-warning btn-sm pull-right"
+            style="padding-top: 5px; padding-bottom: 5px; margin-bottom: 10px;">로그아웃</a>
+        <a href="" class="btn btn btn-outline-warning btn-sm pull-right"
+            style="padding-top: 5px; padding-bottom: 5px; margin-bottom: 10px;">회원가입</a> {% endcomment %}
+        <!-- <a href="" class="btn btn btn-secondary float-right" data-toggle="button" aria-pressed="false"
+            autocomplete="off" style="padding-top: 5px; padding-bottom: 5px; margin-bottom: 10px;">업로드</a> -->
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12"> <!-- 여기서 4는 12개 중 1/3을 나타냅니다. -->
+            <div class="card mb-4" style="height:400px; flex-direction: row; border-style:medium; border-width: 2px; border-color: #023c67;">
+                <img src="{{ goods.image.file_path.url }}" class="card-img-top" alt="{{ goods.alt_text }}">
+                <div class="card-body">
+                    {% comment %} <h5 class="card-title">{{ goods.id }}</h5> {% endcomment %}
+                    <p class="card-text">{{ goods.alt_text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

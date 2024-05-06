@@ -1,0 +1,108 @@
+{% extends "./base.html" %}
+{% block upload %}
+
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Upload</title>
+  <script src="{% static 'index.js' %}" type="text/javascript"></script>
+
+  <link href="{% static 'style_up.css' %}" rel="stylesheet" />
+  <!-- <link href='{% static "css/styles.css" %}' rel="stylesheet" /> -->
+</head>
+
+<body>
+
+  <div class="container" style="flex-direction: column">
+    <div class="image-upload" id="image-upload" style="padding-top: 50px; margin-bottom: 10px; position: relative;">
+      {% if submitted %}
+      <script>
+        window.location.href = "{% url 'review' %}";
+      </script>
+      {% else %}
+      <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="fileContainer" >
+          <div class="fileInput">
+            {% comment %} <input type="file" id="chooseFile" name="file_path" accept="image/*" onchange="loadFile(this)"> {% endcomment %}
+            <p style="padding-left: 10px;">FILE NAME: </p>
+            <p id="fileName"></p>
+          </div>
+          <!-- <div class="buttonContainer" onclick="showImage()"> -->
+            {% comment %} <a class="btn btn--blue">SUBMIT</a> {% endcomment %}
+            <div class="btn btn-primary btn-lg" style="font-size:13px; font-weight: bold; background-color: #fff; color: #023c67; border-style:medium; border-width: 2px; border-color: #023c67;">
+              <label for="chooseFile">
+                {% comment %} 👉 사진 업로드 버튼 👈 {% endcomment %}
+                <b>이미지업로드</b> 
+              </label>
+            </div>
+            <input type="submit" class="btn btn-primary btn-lg" value="대체텍스트 생성" style="font-size:13px; font-weight: bold; background-color: #fff; color: #023c67; border-style:medium; border-width: 2px; border-color: #023c67; margin-left:0px;"> {% comment %} onclick="showImage()" {% endcomment %}
+            <!-- </div> -->
+          </div>
+          <input type="file" id="chooseFile" name="file_path" accept="image/*" onchange="loadFile(this)">
+      </form>
+      {% endif %}
+
+    </div>
+    <div class="content" style="flex-direction: column; justify-content: center;">
+      <div class="image-show" id="image-show" style="top: 0; left: 0;"></div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<!-- <body>
+    <div class="container">
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+  
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">
+            상품명
+          </label>
+          <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="제목">
+        </div>
+  
+        <div class="mb-3">
+          <label for="exampleFormControlInput2" class="form-label">
+            가격
+          </label>
+          <input type="text" name="price" class="form-control" id="exampleFormControlInput2" placeholder="가격">
+        </div>
+  
+        <div class="input-group mb-3">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="chooseFile" name="chooseFile" accept="image/*">
+            <label class="custom-file-label" for="chooseFile">파일 선택</label>
+          </div>
+        </div>
+  
+        <div class="fileContainer">
+          <div class="fileInput">
+            <p>FILE NAME: </p>
+            <p id="fileName"></p>
+          </div>
+          <div class="buttonContainer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+  
+    {% if submitted %}
+        Success
+    {% else %}
+        <div class="imageContainer">
+          <img src="{{ file_path }}" alt="업로드된 이미지">
+        </div>
+    {% endif %}
+    </div>
+</body>
+</html> -->
+
+{% endblock %}

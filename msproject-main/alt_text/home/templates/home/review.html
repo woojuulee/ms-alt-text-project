@@ -1,0 +1,49 @@
+{% extends "./base.html" %}
+{% block review %}
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>review alt</title>
+    <link href="{% static 'style_up.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class='container' style="padding-top: 100px; flex-direction: column;" >
+        <div>
+            <a href="{% url 'upload' %}"><button class="btn btn-primary btn-lg" type="button" style="font-size:15px; font-weight: bold; background-color: #fff; color: #023c67; border-width: 3px; border-color: #023c67; float: left; margin-bottom: 30px;">back</button></a>
+            
+        </div>
+        <div class="row g-0" >
+            <form action="{% url 'review' goods_id=goodsupload.image.id %}" method="POST">
+        
+        {% comment %} <form action="{% url 'review' %}" method="POST"> {% endcomment %}
+                {% csrf_token %}
+                <div class="card mb-3" style="flex-direction: row; border-style:medium; border-width: 2px; border-color: #023c67;">
+                    <div class="col-md-6" style= "display: grid; place-items: center;">
+                        <img src="/uploads/{{ file_path }}" class="img-fluid rounded-start" alt="{{ gpt_result }}" width="500px" height="480px">
+                    </div>
+                    <div class="col-md-6" style= "padding-top: 40px; padding-bottom: 20px; padding-right: 20px; text-align: center; display:inline-grid; align-content:center; vertical-align:middle;">
+                        <div class="card mb-3" style="border-style:solid; border-width: 1px; border-color: #023c67; max-width: 600px; margin-bottom: 20px;">
+                            <div class="card-header" style="background-color: rgb(2,60,103,0.9); color:#fff;">
+                                상품명을 수정해주세요
+                            </div>
+                                <textarea name = "name" style="width: 600px; height: 35px;">{{ file_path }}</textarea>
+                        </div>
+                        <div class="card mb-3" style="border-style:solid; border-width: 1px; border-color: #023c67; max-width: 600px; margin-top: 20px;">
+                            <div class="card-header" style="background-color: rgb(2,60,103,0.9); color:#fff;">
+                                상품설명을 수정해주세요
+                            </div>
+                                <textarea name = "alt_text" style="width: 600px; height: 200px;">{{ gpt_result }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" id="confirmBtn" class="btn btn-primary btn-lg" value="SUBMIT" style="font-size:15px; font-weight: bold; background-color: #fff; color: #023c67; border-width: 3px; border-color: #023c67; float: right;">
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}
