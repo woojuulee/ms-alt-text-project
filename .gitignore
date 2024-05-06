@@ -1,6 +1,7 @@
 *.jpg
 *.pdf
 .env
+*.png
 
 chatgpt4/extra.ipynb
 py39_gpt/
